@@ -133,7 +133,7 @@ unsigned int output;
 		
 		//--------------------CONTROL DEL AGUA---------------------------------------------------
 		
-		if(((int) adcValue[0])<93) //-----------POCO AGUA LED AMARILLO INCLUYE TEMPORIZADOR PARA PARPADEO DEL LED AMARILLO
+		if(((int) adcValue[0])<79) //-----------POCO AGUA LED AMARILLO INCLUYE TEMPORIZADOR PARA PARPADEO DEL LED AMARILLO
 		{
 			//HAL_GPIO_WritePin(GPIOD,AMARILLO_Pin, 1);
 			__HAL_RCC_TIM2_CLK_ENABLE();
@@ -144,13 +144,13 @@ unsigned int output;
 			__HAL_RCC_TIM2_CLK_DISABLE();
 			}; 
 		
-		if(93 < ((int) adcValue[0]) && (106 > (int) adcValue[0])) //-----------MEDIO LLENO DE AGUA LED AZUL OSCURO
+		if(79 < ((int) adcValue[0]) && (93 > (int) adcValue[0])) //-----------MEDIO LLENO DE AGUA LED AZUL OSCURO
 		{
 			HAL_GPIO_WritePin(GPIOD,AZUL_O_Pin, 1);
 		} 
 		else HAL_GPIO_WritePin(GPIOD,AZUL_O_Pin, 0);
 		
-		if(((int) adcValue[0])> 106) //-----------LLENO DE AGUA LED AZUL CLARO
+		if(((int) adcValue[0])> 93) //-----------LLENO DE AGUA LED AZUL CLARO
 		{
 			HAL_GPIO_WritePin(GPIOB,AZUL_C_Pin, 1);
 		} 
@@ -424,23 +424,6 @@ int Debouncer(int input)
 	unsigned int  integrator = 0;
 	 int cap = 3200000000;
 	int cont;
-	/*if (input == 0)
-
-    {
-    if (integrator > 0)
-      integrator--;
-    }
-  else if (integrator < 16000000*0.1)
-    integrator++;
- 
-  if (integrator == 0)
-    return 0;
-  else if (integrator > 16000000*0.1)
-    {
-    return 1;
-			
-    integrator = 16000000*0.1; 
-    }*/
 		
 		if(integrator != input)
 		{
